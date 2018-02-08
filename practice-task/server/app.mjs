@@ -19,6 +19,9 @@ app.use(cors({ origin: '*' }));
 app.get('/payment-result', (req, res) => {
     res.send(db.paymentResult());
 });
+app.get('/mobile-operators-list', (req, res) => {
+    res.send(db.mobileOperatorsList());
+});
 // Mobile API
 
 const server = app.listen(SERVER_PORT, () => {

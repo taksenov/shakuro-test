@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
-import Switcher from './Switcher';
-import CardNumberHolder from './CardNumberHolder';
+import Switcher from './components/MobilePaymentContainer';
+import CardNumberHolder from './components/MobilePaymentOperatorsGrid/MobilePaymentOperatorsGrid';
 import ModalButton from './ModalButton';
+
+import './App.css';
 
 class App extends Component {
     render() {

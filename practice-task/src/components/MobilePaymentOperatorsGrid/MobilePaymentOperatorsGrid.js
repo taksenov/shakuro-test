@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CardNumberInput from './CardNumberInput';
-
-class CardNumberHolder extends Component {
+import CardNumberInput from '../MobilePaymentOperator';
+//1. Выбор оператора
+class MobilePaymentOperatorsGrid extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,7 +11,7 @@ class CardNumberHolder extends Component {
         this.handleChange = this.handleChange.bind(this);
     } //constructor
 
-    static displayName = 'Card number holder';
+    static displayName = 'Выбор оператора';
 
     handleChange(value) {
         this.setState({ cardNumber: value });
@@ -28,4 +28,4 @@ class CardNumberHolder extends Component {
     }
 }
 
-export default CardNumberHolder;
+export default MobilePaymentOperatorsGrid;
