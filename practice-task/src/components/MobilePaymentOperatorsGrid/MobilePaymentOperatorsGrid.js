@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import CardNumberInput from '../MobilePaymentOperator';
-//1. Выбор оператора
+import { connect } from 'react-redux';
+
+import { operatorsRequest } from '../../actions/operatorsActions';
+
 class MobilePaymentOperatorsGrid extends Component {
     constructor(props) {
         super(props);
@@ -8,6 +11,7 @@ class MobilePaymentOperatorsGrid extends Component {
             cardNumber: ''
         };
 
+        this.props.operatorsRequest();
         this.handleChange = this.handleChange.bind(this);
     } //constructor
 
@@ -19,6 +23,10 @@ class MobilePaymentOperatorsGrid extends Component {
 
     render() {
         const { cardNumber } = this.state;
+        const { operators } = this.props;
+
+        console.log(operators);
+
         return (
             <CardNumberInput
                 onChange={this.handleChange}
@@ -28,4 +36,15 @@ class MobilePaymentOperatorsGrid extends Component {
     }
 }
 
-export default MobilePaymentOperatorsGrid;
+const mapStateToProps = state => ({
+    // isFetching: state.search.isFetching,
+    operators: state.operators
+});
+
+const mapDispatchToProps = {
+    operatorsRequest
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+    MobilePaymentOperatorsGrid
+);

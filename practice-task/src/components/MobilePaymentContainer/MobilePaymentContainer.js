@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Menu } from 'semantic-ui-react';
+import { Container, Menu, Tab } from 'semantic-ui-react';
 import './Switcher.css';
 
 // Для работы этой компоненты нужно использовать методы React.Children.toArray
@@ -24,9 +24,28 @@ class MobilePaymentContainer extends Component {
         const { children } = this.props;
         const { activeItem } = this.state;
 
+        const panes = [
+            {
+                menuItem: 'Tab 1',
+                render: () => <Tab.Pane loading>Tab 1 Content</Tab.Pane>
+            },
+            {
+                menuItem: 'Tab 2',
+                render: () => <Tab.Pane>Tab 2 Content</Tab.Pane>
+            },
+            {
+                menuItem: 'Tab 3',
+                render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>
+            }
+        ];
+
+        const TabExampleLoading = () => <Tab panes={panes} />;
+
         return (
             <div>
                 <Container>
+                    <TabExampleLoading />
+
                     <Menu pointing secondary>
                         {React.Children.map(children, (child, childIndex) => (
                             <Menu.Item
@@ -52,3 +71,17 @@ class MobilePaymentContainer extends Component {
 }
 
 export default MobilePaymentContainer;
+
+// import { Tab } from 'semantic-ui-react'
+
+// const panes = [
+//   { menuItem: 'Tab 1', render: () => <Tab.Pane loading>Tab 1 Content</Tab.Pane> },
+//   { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
+//   { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+// ]
+
+// const TabExampleLoading = () => (
+//   <Tab panes={panes} />
+// )
+
+// export default TabExampleLoading
