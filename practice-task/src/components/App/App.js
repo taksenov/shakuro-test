@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import MobilePaymentOperator from '../MobilePaymentOperator';
 import MobilePaymentOperatorsGrid from '../MobilePaymentOperatorsGrid';
 import { Container, Tab } from 'semantic-ui-react';
 
 import './App.css';
 
 class App extends Component {
-    // render: () => <Tab.Pane loading>Tab 1 Content</Tab.Pane>
     render() {
         const panes = [
             {
@@ -25,7 +23,7 @@ class App extends Component {
                 menuItem: 'Результат',
                 render: () => (
                     <Tab.Pane>
-                        <MobilePaymentOperator />
+                        <MobilePaymentOperatorsGrid />
                     </Tab.Pane>
                 )
             }

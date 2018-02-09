@@ -1,43 +1,48 @@
 import React, { Component } from 'react';
-import CardNumberInput from '../MobilePaymentOperator';
+import MobilePaymentOperator from '../MobilePaymentOperator';
 import { connect } from 'react-redux';
+import Spinner from 'react-svg-spinner';
+import { Grid } from 'semantic-ui-react';
 
 import { operatorsRequest } from '../../actions/operatorsActions';
 
 class MobilePaymentOperatorsGrid extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            cardNumber: ''
-        };
 
         this.props.operatorsRequest();
-        this.handleChange = this.handleChange.bind(this);
     } //constructor
 
-    static displayName = 'Выбор оператора';
-
-    handleChange(value) {
-        this.setState({ cardNumber: value });
-    } //handleChange
-
     render() {
-        const { cardNumber } = this.state;
-        const { operators } = this.props;
-
-        console.log(operators);
+        const { isFetching, operators } = this.props;
 
         return (
-            <CardNumberInput
-                onChange={this.handleChange}
-                cardNumber={cardNumber}
-            />
+            <div className="MobileOperatorsList">
+                {isFetching ? (
+                    <div>
+                        <Grid centered columns={2}>
+                            <Grid.Column>
+                                <Spinner size="64px" color="#66BEF2" gap={5} />
+                            </Grid.Column>
+                        </Grid>
+                    </div>
+                ) : (
+                    <div>
+                        {operators.operators.map(operator => (
+                            <MobilePaymentOperator
+                                key={operator.index}
+                                operator={operator}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    // isFetching: state.search.isFetching,
+    isFetching: state.operators.isFetching,
     operators: state.operators
 });
 
