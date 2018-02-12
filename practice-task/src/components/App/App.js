@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MobilePaymentOperatorsGrid from '../MobilePaymentOperatorsGrid';
+import MobilePaymentForm from '../MobilePaymentForm';
 import { Container, Tab } from 'semantic-ui-react';
 
 import './App.css';
@@ -7,6 +8,7 @@ import './App.css';
 class App extends Component {
     render() {
         const panes = [
+            //step 1
             {
                 menuItem: 'Выбор оператора',
                 render: () => (
@@ -15,10 +17,18 @@ class App extends Component {
                     </Tab.Pane>
                 )
             },
+
+            //step 2
             {
                 menuItem: 'Оплата',
-                render: () => <Tab.Pane>Tab 2 Content</Tab.Pane>
+                render: () => (
+                    <Tab.Pane>
+                        <MobilePaymentForm />
+                    </Tab.Pane>
+                )
             },
+
+            //step 3
             {
                 menuItem: 'Результат',
                 render: () => (
@@ -39,7 +49,6 @@ class App extends Component {
             </div>
         );
     }
-    // }
 }
 
 export default App;
