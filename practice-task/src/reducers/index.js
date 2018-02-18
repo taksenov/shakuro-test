@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import operators from './operators';
+import operatorsFromAPI from './operators';
+import operatorSelected from './operatorSelected';
 
 export default combineReducers({
-    operators
+    operatorsFromAPI,
+    operatorSelected
 });

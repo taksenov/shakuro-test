@@ -13,6 +13,12 @@ class MobilePaymentOperatorsGrid extends Component {
         this.props.operatorsRequest();
     } //constructor
 
+    handleClickOnOperator = value => {
+        console.log('operator+++++');
+        console.log(value);
+        console.log('operator+++++');
+    };
+
     render() {
         const { isFetching, operators } = this.props;
 
@@ -32,6 +38,9 @@ class MobilePaymentOperatorsGrid extends Component {
                             <MobilePaymentOperator
                                 key={operator.index}
                                 operator={operator}
+                                onSelectedOperatorClick={
+                                    this.handleClickOnOperator
+                                }
                             />
                         ))}
                     </div>
@@ -42,8 +51,8 @@ class MobilePaymentOperatorsGrid extends Component {
 }
 
 const mapStateToProps = state => ({
-    isFetching: state.operators.isFetching,
-    operators: state.operators
+    isFetching: state.operatorsFromAPI.isFetching,
+    operators: state.operatorsFromAPI
 });
 
 const mapDispatchToProps = {

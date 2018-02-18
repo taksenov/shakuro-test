@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import MobilePaymentOperatorsGrid from '../MobilePaymentOperatorsGrid';
+import { connect } from 'react-redux';
 import MobilePaymentForm from '../MobilePaymentForm';
 import { Container, Tab, Message } from 'semantic-ui-react';
+
+import { operatorSelected } from '../../actions/selectedOperatorActions';
 
 import './App.css';
 
@@ -11,15 +14,22 @@ class App extends Component {
         this.state = {
             activeIndex: 0,
             paymentStepCondition: 0,
-            needMessage: true
+            hideMessage: true
         };
     } //constructor
 
     handleTabChange = (e, { activeIndex }) => {
-        if (activeIndex === this.state.paymentStepCondition) {
-            this.setState({ activeIndex });
+        console.log('operator-----');
+        console.log(this.props.selectedOperator.operator.index);
+        console.log('operator-----');
+
+        if (this.props.selectedOperator.operator.index) {
+            this.setState({
+                activeIndex: activeIndex,
+                hideMessage: true
+            });
         } else {
-            this.setState({ needMessage: false });
+            this.setState({ hideMessage: false });
             console.log(
                 'Условие для перехода на следующий шаг не выполнено',
                 activeIndex,
@@ -36,15 +46,15 @@ class App extends Component {
             {
                 menuItem: 'Выбор оператора',
                 render: () => {
-                    const needMessage = this.state.needMessage;
+                    const hideMessage = this.state.hideMessage;
                     return (
                         <Tab.Pane>
                             <MobilePaymentOperatorsGrid />
-                            <Message hidden={needMessage} warning>
+                            <Message hidden={hideMessage} warning>
                                 <Message.Header>Внимание!</Message.Header>
                                 <p>
-                                    Для перехода на следующий шаг необходимо
-                                    выбрать оператора
+                                    Для совершения оплаты необходимо выбрать
+                                    оператора
                                 </p>
                             </Message>
                         </Tab.Pane>
@@ -52,21 +62,19 @@ class App extends Component {
                 }
             },
             {
+                //step 2
                 menuItem: 'Оплата',
                 render: () => (
                     <Tab.Pane>
-                        {' '}
-                        //step 2
                         <MobilePaymentForm />
                     </Tab.Pane>
                 )
             },
             {
+                //step 3
                 menuItem: 'Результат',
                 render: () => (
                     <Tab.Pane>
-                        {' '}
-                        //step 3
                         <MobilePaymentOperatorsGrid />
                     </Tab.Pane>
                 )
@@ -91,4 +99,12 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    selectedOperator: state.operatorSelected
+});
+
+const mapDispatchToProps = {
+    operatorSelected
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
