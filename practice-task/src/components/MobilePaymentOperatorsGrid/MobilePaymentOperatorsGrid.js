@@ -9,9 +9,19 @@ import { operatorsRequest } from '../../actions/operatorsActions';
 class MobilePaymentOperatorsGrid extends Component {
     constructor(props) {
         super(props);
-
-        this.props.operatorsRequest();
+        this._isMounted = false;
     } //constructor
+
+    componentDidMount = () => {
+        this._isMounted = true;
+        if (!this.props.operators.isFetched && this._isMounted) {
+            this.props.operatorsRequest();
+        }
+    };
+
+    componentWillUnmount = () => {
+        this._isMounted = false;
+    };
 
     handleClickOnOperator = value => {
         console.log('operator+++++');
