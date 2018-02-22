@@ -23,11 +23,15 @@ class MobilePaymentOperatorsGrid extends Component {
         this._isMounted = false;
     };
 
-    handleClickOnOperator = value => {
-        console.log('operator+++++');
-        console.log(value);
-        console.log('operator+++++');
-    };
+    // handleClickOnOperator = value => {
+    //     console.log('operator+++++');
+    //     console.log(value);
+    //     console.log('operator+++++');
+    // };
+
+    // onSelectedOperatorClick={
+    //                                     this.handleClickOnOperator
+    //                                 }
 
     render() {
         const { isFetching, operators } = this.props;
@@ -48,9 +52,6 @@ class MobilePaymentOperatorsGrid extends Component {
                             <MobilePaymentOperator
                                 key={operator.index}
                                 operator={operator}
-                                onSelectedOperatorClick={
-                                    this.handleClickOnOperator
-                                }
                             />
                         ))}
                     </div>

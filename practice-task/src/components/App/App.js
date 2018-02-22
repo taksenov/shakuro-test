@@ -18,10 +18,42 @@ class App extends Component {
         };
     } //constructor
 
+    componentWillReceiveProps = nextProps => {
+        console.log('cwr nextProps', nextProps);
+        console.log('activeIndex', this.state.activeIndex + 1);
+        if (
+            nextProps.selectedOperator.operator.index &&
+            this.state.activeIndex <= 0
+        ) {
+            this.setState({
+                hideMessage: true,
+                activeIndex: this.state.activeIndex + 1
+            });
+        }
+    };
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+        console.log('this-state', this.state);
+        console.log('nextState', nextState);
+        if (
+            this.state.activeIndex <= nextState.activeIndex &&
+            this.state.activeIndex === 0
+        ) {
+            console.log('return true');
+            return true;
+        }
+        if (nextState.activeIndex === 0) {
+            console.log('return true');
+            return true;
+        }
+        console.log('return false');
+        return false;
+    };
+
     handleTabChange = (e, { activeIndex }) => {
-        console.log('operator-----');
-        console.log(this.props.selectedOperator.operator.index);
-        console.log('operator-----');
+        // console.log('operator-----');
+        // console.log(this.props.selectedOperator.operator.index);
+        // console.log('operator-----');
 
         if (this.props.selectedOperator.operator.index) {
             this.setState({
@@ -33,7 +65,8 @@ class App extends Component {
             console.log(
                 'Условие для перехода на следующий шаг не выполнено',
                 activeIndex,
-                this.state.paymentStepCondition
+                this.state.paymentStepCondition,
+                this.state.hideMessage
             );
         }
     }; //handleTabChange

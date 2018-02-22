@@ -7,9 +7,9 @@ import { operatorSelected } from '../../actions/selectedOperatorActions';
 class MobilePaymentOperator extends Component {
     handleOperatorSelect = () => {
         // console.log('click on operator');
-        const { onSelectedOperatorClick } = this.props;
+        // const { onSelectedOperatorClick } = this.props;
         this.props.operatorSelected(this.props.operator);
-        onSelectedOperatorClick(this.props.operator);
+        // onSelectedOperatorClick(this.props.operator);
     }; //handleOperatorSelect
 
     // handleChangeForm(event) {
